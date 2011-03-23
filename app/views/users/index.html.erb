@@ -1,0 +1,17 @@
+<%= render 'shared/flash_messages'%>
+
+
+<h1>Users List</h1>
+<% @profiles.each do |profile|%>
+<div id="listusers">
+	<% if profile.image? %>
+		<%= image_tag profile.image.url(:small), :id=>'thumbimage'%>
+	<%end%>
+	<p> Username: <%= link_to profile.first_name , "/users/#{profile.slug}/profile" %> 
+		<%if valid_user?(profile.user_id)%> 
+			<%= link_to 'Edit', "/users/#{profile.slug}/profile/edit" %> 
+		<%end%> 
+	</p>
+	
+</div>
+<% end%>

@@ -1,0 +1,19 @@
+<div id="header">
+<div id = "primary_nav">
+			<nav ><ul>
+					<li class="active"><%= link_to "Home", users_path%></li>
+					<% if !current_user.nil? %>
+					<li><%= link_to "My Profile", user_home_link(current_user) %></li>
+					<%end%>
+					<% if current_user.nil? %>
+					<li><%= link_to "Login", login_path %></li>
+					<%else%>
+					<li><%= link_to "Logout", logout_path %></li>
+					<%end%>
+					<% if current_user.nil? %>
+					<li><%= link_to "Sign Up", new_user_path %></li>
+					<%end%>
+				</ul></nav>
+				</div>
+
+	</div>

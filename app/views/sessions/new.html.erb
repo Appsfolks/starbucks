@@ -1,0 +1,24 @@
+<%= render 'shared/flash_messages'%>
+
+
+<div id='signup_form'>
+<div id='inneralign'>
+  <form action="authenticate" method="post">
+
+  <div class="field">
+   <label for="user_name"; class="label">User Name</label><input type="text" name="user_name" value="" id="user_name">
+	<label for="password"; class="label">Password</label><input type="password" name="password" value="" id="password">
+   </div>
+
+	<div id="signup-button">
+	<button class="blue-pill"> Login </button> 	
+   </div>
+  </form>
+
+  </div>
+<div class="facebook-login">
+
+<%= link_to "Login with Facebook", :controller=>'sessions', :action=>'fbsignin'%>
+</div>
+
+</div>

@@ -1,0 +1,92 @@
+<%=content_tag :div, "", :class=>"post", :id=>"post_#{post.id}" do %>
+	<div class="post-main">
+		
+	<div class="post-main-detail">
+		<%= content_tag  :div, "",:class=>"post-total-comments" ,:id=>"post-comment-count_#{post.id}" do %> <%=post.comment_threads.length %><%end%>
+	
+  <%= content_tag :div, :id=>"fire_post_#{post.id}" do %>	
+   		<% if post.likes >=10 %>
+   			<%= render :partial=>'firepost', :locals=>{:post=>post}%>
+   		<%end%>
+   <%end%>
+
+<%= content_tag :div, :id=>"silver_post_#{post.id}" do %>	
+   		<% if post.likes >=20 %>
+   			<%= render :partial=>'silverpost', :locals=>{:post=>post}%>
+   		<%end%>
+   <%end%>
+		
+<%= content_tag :div, :id=>"gold_post_#{post.id}" do %>	
+   		<% if post.likes >=30 %>
+   			<%= render :partial=>'goldpost', :locals=>{:post=>post}%>
+   		<%end%>
+   <%end%>
+
+<%= content_tag :div, :id=>"trophy_post_#{post.id}" do %>	
+   		<% if post.likes >=40 %>
+   			<%= render :partial=>'trophypost', :locals=>{:post=>post}%>
+   		<%end%>
+   <%end%>
+
+<%= content_tag :div, :id=>"champ_post_#{post.id}" do %>	
+   		<% if post.likes >=50 %>
+   			<%= render :partial=>'champpost', :locals=>{:post=>post}%>
+   		<%end%>
+   <%end%>
+		
+	<% if post.user.profile.image? %>
+	<div class="post-user-img">
+		<%= image_tag post.user.profile.image.url(:small), :id=>'thumbimage'%>
+		</div>
+	<%end%>
+  <div class="post-user-content">
+	<div class="post-user-content-header">
+  	<div class="post-user"><%="#{post.user.profile.first_name} #{post.user.profile.last_name}"%></div> <br/>
+  	
+  	<div class="post-timestamp"><%="#{time_ago_in_words(post.created_at)} ago " %> </div>
+   </div>
+	<div class="post-content"> <%= post.post_content %> </div>
+
+  </div>
+
+<div class="post-bottom" id="post_bottom_#{post.id}">
+	<div class="post-comment-link"> <%= link_to "comment", "javascript:void(0);",:id=>"post_comment_link_#{post.id}", :onClick=>"toggleComment('#comment_border_#{post.id}')"%>
+	
+		<%if post.likes > 0%>
+			<%=content_tag :div, post.likes, :id=>"post_like_count_#{post.id}", :class=>"post-likes"%>
+
+		<%else%>
+		 	<%=content_tag :div, "", :id=>"post_like_count_#{post.id}", :class=>"post-likes"%>
+		<%end%>
+		
+			</div>
+ </div>
+	
+
+<div class="post-like-link">
+	<%= link_to image_tag("like.png", :border => 0), post_like_link(post), :remote=>:true%> 
+
+</div>
+	
+</div>
+
+ </div>
+<br/>
+
+<%if post.comment_threads.length > 0%>
+
+	<%if post.comment_threads.length > 3%>
+
+   <%= link_to "View all Comments...", more_comments_link(post),:id=>"all_comm_link_#{post.id}",:remote=>:true, :class=>"view-all-comments"%>
+  <%end%>
+
+	
+	<%=render :partial => 'comments/index',:locals => {:comments => post.comment_threads.limit(3), :p_id=>post.id}%>
+
+	<%else%>
+		<%= content_tag :ul, :id=>"comments_#{post.id}" do%>
+			
+		<%end%>
+	<%end%>
+	<%= render :partial => "comments/new", :locals => { :commentable => post }%><br/>
+<%end%>

@@ -1,0 +1,13 @@
+var new_item = $("<li><%= escape_javascript(render(:partial=>'post', :locals =>{:post=>@post})) %></li>");
+new_item.hide();
+/* Add the new post to the top of the posts list */
+$("#posts-list").prepend(new_item);
+
+new_item.slideDown('normal');
+
+/* Highlight the new post */
+$("#post_<%= @post.id %>").effect("highlight", {}, 3000);
+
+
+/* Reset the post form */
+clearPostText();

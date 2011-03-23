@@ -1,0 +1,9 @@
+var item = "<h2><%= pluralize(obj.errors.count, 'error') %> occured while saving <%=obj.class.name.underscore.humanize%></h2>";
+
+<% if obj.errors.any? %>
+
+     item = item + "<ul> <% obj.errors.full_messages.each do |msg| %> <li><%= msg %></li> <% end %> </ul> "
+   
+ <% end %>
+
+$.prompt(item);

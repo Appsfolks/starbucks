@@ -1,0 +1,84 @@
+<%= render 'shared/flash_messages'%>
+
+<div id="posts-section">
+<%=render :partial=>'form', :locals=>{:post=>@post} %>
+
+<ul id="posts-list">
+  <% @posts.each do |post| %>
+	
+    <li>
+
+	 <%= render :partial=> 'post', :locals=>{:post=>post}%>
+
+    </li>  
+
+
+  <% end %>
+</ul>
+</div>
+
+<%=content_for :leftbox do%>
+
+	<% if @user.profile.image?%>
+	   <div class="profile-image">
+		<p align="center"><%= image_tag @user.profile.image.url(:large), :id=>'profileimage', :class=>"imgresize"%> </p>
+		<div id="profilename">
+			<p align="center"> 
+				<% if its_me?(@user)%>
+				    It's You!
+				<%else%>
+			  		<%=(@user.profile.first_name).humanize + " " + (@user.profile.last_name).humanize%> 
+			   <%end%>
+			</p>
+		</div>
+		</div>
+	<%else%>
+		No Image
+	<%end%>
+	
+	<div id="friend_status_<%=@user.id%>">
+	
+		<%= render :partial => 'users/friendstatus', :locals=>{:user=>@user}%>
+	
+	</div>
+	
+
+<%end%>
+
+<%=content_for :rightbox do%>
+
+<div class="friendslist">
+<p>
+	<%if its_me?(@user)%>
+		Your Network
+	<%else%>
+	 <%=(@user.profile.first_name).humanize %>'s Network 
+	<%end%>
+</p>
+
+<div id= "friendscover">
+ <%if @user.friends.length ==0%>
+	<%if its_me?(@user)%>
+	   <p>It's time to add friends! </p>
+	<%else%>
+		<p> No Friends Yet!, You can be one </p>
+	<%end%>
+<%end%>
+<table class="friendstable">
+  <%@user.friends.sort_by{rand}[0..9].each_slice(3) do |users|%>
+    <tr>
+	<%users.each do |user|%>
+        <td><%= link_to image_tag(user.profile.image.url(:thumb)), user_home_link(user) %></td>
+      <% end %>
+    </tr>
+  <% end %>
+</table>
+</div> <br/>
+<p align="right"> <%= link_to "View all", "#"%> </p>
+</div>
+
+
+
+<%end%>
+
+

@@ -1,0 +1,5 @@
+development:
+   app_id: '105732089460344'  
+   secret: '4d55791de2aeb692424ac0726dae0376'
+   callback_host: 'web1.tunnlr.com:11694'
+    

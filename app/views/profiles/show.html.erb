@@ -1,0 +1,44 @@
+<%=render 'shared/flash_messages'%>
+
+<div id="leftColumn">
+		<% if @profile.image?%>
+			<%= image_tag @profile.image.url(:large), :id=>'profileimage'%>
+		<%else%>
+			No Image
+		<%end%>
+		<div id="profilename">
+			<p> <%=@profile.last_name + ', ' + @profile.first_name%> </p>
+		</div>
+</div>
+<div id="middleContent">
+<div id= 'signup_form'>
+<h1>Your Profile</h1>
+
+<table id="showProfile">
+	<div class = "field">
+	<tr><th class="label">First Name:</th>
+	<td><%=@profile.first_name%></td></tr>
+	<div> 
+	
+	<div class = "field">
+	<tr><th class="label">Last Name:</th>
+	<td><%=@profile.last_name%></td></tr>
+	</div> 
+	
+	<div class = "field">
+	<tr><th class="label">BirthDay:</th>
+	<td><%=@profile.birth_day %></td></tr>
+	</div>
+	
+</table>
+
+
+<div>
+	<% if valid_user?(@user.id) %>
+	<%= link_to 'Edit Profile', "/users/#{@user.cached_slug}/profile/edit"%>
+	<%end%>
+</div>
+
+</div>
+
+</div>

@@ -1,0 +1,11 @@
+<%=form_for [commentable, Comment.new],:action=>'comments/create', :remote => true do |f|%>
+ 	<%=f.hidden_field :commentable_id, :value=> commentable.id %><br/>
+	<%= content_tag :div,"", :class=>"comment-border", :id=>"comment_border_#{commentable.id}" do %>
+		<%= content_tag :div, :id=>"commentbox_#{commentable.id}", :class=>"comment-box-cover" do%>
+ 			<%=f.text_area :body,:class=>"comment-text-box",:id=>"comment_text_#{commentable.id}", :value=>"Write a comment...", :onClick=>"clearCommentText('input#comment_text_#{commentable.id}')"%> 
+			<button class="comment-button" > Comment </button>
+		
+			<%end%>
+		<%end%>
+
+<%end%>

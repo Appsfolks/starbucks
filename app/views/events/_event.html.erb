@@ -1,0 +1,35 @@
+<div class="event-day">
+	<h2> <%=event.start_date.strftime("%A, %d %b %Y")%> </h2>
+</div>
+<%= content_tag :div , "", :class=>"event-summary" do%>
+<div class="event-date">
+	<div class="time">
+		<%= event.start_date.strftime("%I:%M%p")%>
+	</div>
+	<div class="day">
+		<%=event.category%>
+	</div>
+</div>
+
+<%= content_tag :div, "", :class=>"event-body" do%>
+<h3> <%= link_to event.name, event_path(event)%> </h3>
+<p><%= event.description %> </p>
+	
+
+<%end%>
+
+<%= content_tag :div, "", :class=>"event-location" do%>
+	<div class="location-name">
+	<%= event.address1 %> <br/>
+	</div>
+	<%=event.address2%> <br/>
+	<%=event.city%> <br/>
+	<%=event.state%> <br/>
+	<%=event.zipcode%> <br/>
+	
+<%end%>
+
+
+
+
+<%end%>

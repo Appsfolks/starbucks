@@ -1,0 +1,21 @@
+
+var lastcommentid = "";
+<%@comments.each do |comment| %>
+
+var new_item = $("<%= escape_javascript(render(:partial=>'comments/commentItem', :locals =>{:comment=>comment})) %>");
+new_item.hide();
+/* Add the new comment to the bottom of the comments list */
+$("#comments_<%=@post.id %>").append(new_item);
+
+new_item.slideDown('normal');
+lastcommentid = "div#comment_<%=comment.id%>";
+
+hite = $("div#comment_<%=comment.id%>").height()
+
+<%end%>
+
+$("#all_comm_link_<%=@post.id %>").hide();
+
+$elem = $(lastcommentid)
+
+$('html, body').animate({scrollTop: htte}, 800);

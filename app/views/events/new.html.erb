@@ -1,0 +1,61 @@
+<div id='signup_form'>
+<%= form_for(@event, :html=> {:multipart=>true}) do |f| %>
+  <% if @event.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@event.errors.count, "error") %> prohibited this profile from being saved:</h2>
+
+      <ul>
+      <% @event.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+<div id='inneralign'>
+	
+  <div class="field">
+    <%= f.label :name, 'Event Name:', :class=>'label' %><br />
+    <%= f.text_field :name %>
+  </div>
+
+ <div class="field">
+    <%= f.label :description, 'Event Description:', :class=>'label' %><br />
+    <%= f.text_area :description %>
+  </div>
+
+  <div class="field">
+	<%= f.label :Start_date, 'Start Date:', :class=>'label' %><br />
+    <%= date_select :event, :start_date %>
+  </div>
+
+	<div class="field">
+	<%= f.label :End_date, 'End Date:', :class=>'label' %><br />
+    <%= date_select :event, :end_date %>
+  </div>
+
+	<div class="field">
+	<%= f.label :City, 'City:', :class=>'label' %><br />
+  	<%=f.text_field :city_name, :class => 'city_autocomplete'%>
+	</div>
+	
+	<div class="field">
+	<%= f.label :State, 'State:', :class=>'label' %><br />
+  	<%= f.text_field :state_name, :class => 'state_autocomplete' %>
+	</div>
+	
+	<div class="field">
+	<%= f.label :Country, 'Country:', :class=>'label' %><br />
+  	<%= f.text_field :country_name, :class => 'country_autocomplete' %>
+	</div>
+
+<div class="field">
+	<%= f.label :image, 'Event Photo', :class=>'label' %><br />
+    <%= f.file_field :image %>
+  </div>
+	<div id="signup-button">
+		<button class="blue-pill"> <% if params[:action] == 'edit' %> Update <%else%> Create Event <%end%> </button>
+   </div>
+	
+</div>
+<% end %>
+</div>

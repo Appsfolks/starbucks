@@ -1,0 +1,39 @@
+$("#post_like_count_<%=@post.id%>").html("  <%=  @post_like_count.to_s%>  ");
+
+<%if @post_like_count ==10 %> 
+var item = $("<%= escape_javascript(render :partial=>'firepost', :locals=>{:post=>@post}) %>")	;
+item.hide();
+$("#fire_post_<%=@post.id%>").append(item);
+item.show('slow');
+<%end%>
+
+<%if @post_like_count ==20 %> 
+var item = $("<%= escape_javascript(render :partial=>'silverpost', :locals=>{:post=>@post}) %>")	;
+item.hide();
+$("#silver_post_<%=@post.id%>").append(item);
+item.show('slow');
+<%end%>
+
+<%if @post_like_count ==30 %> 
+var item = $("<%= escape_javascript(render :partial=>'goldpost', :locals=>{:post=>@post}) %>")	;
+item.hide();
+$("#gold_post_<%=@post.id%>").append(item);
+item.show('slow');
+<%end%>
+
+<%if @post_like_count ==40 %> 
+var item = $("<%= escape_javascript(render :partial=>'trophypost', :locals=>{:post=>@post}) %>")	;
+item.hide();
+$("#trophy_post_<%=@post.id%>").append(item);
+item.show('slow');
+<%end%>
+
+
+<%if @post_like_count ==50 %> 
+var item = $("<%= escape_javascript(render :partial=>'champpost', :locals=>{:post=>@post}) %>")	;
+item.hide();
+$("#champ_post_<%=@post.id%>").append(item);
+item.show('slow');
+<%end%>
+
+	

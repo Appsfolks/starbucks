@@ -1,0 +1,3 @@
+$("div").find("div#<%=@comment_item%>").fadeOut(300, "linear")
+$("#post-comment-count_<%=@post.id%>").html("<%=@post.comment_threads.length.to_s %>");
+$("div").find("div#commentcount_"+"<%=@post.id%>").html("<%= pluralize(@post.comment_threads.length, 'comment') %>" + " so far")

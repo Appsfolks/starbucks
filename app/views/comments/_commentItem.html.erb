@@ -1,0 +1,22 @@
+
+<li>
+	<%= content_tag :div, :id=>"comment_#{comment.id}", :class=>"comment-container" do %>
+	<% if user_comment?(comment) %><%= link_to image_tag("delete.png",:border=>0), delete_link(comment), :remote=>:true, :class=>'delete-comment-link'%> <%end%>
+	<% if comment.user.profile.image? %>
+		<%= link_to image_tag(comment.user.profile.image.url(:thumb)),user_home_link(comment.user), :id=>"thumbimage", :class=>"comment-img-container"%>
+	<%end%>
+  <div class="comment-content-container"><b><%="#{comment.user.profile.first_name} #{comment.user.profile.last_name}  "%></b> <%=comment.body %> <br/>
+  <div class="comment-timestamp">Posted <%="#{time_ago_in_words(comment.created_at)} ago" %> 
+<%if comment.likes > 0%>
+	<%=content_tag :div, pluralize(comment.likes, 'person') + '  liked', :id=>"comment_like_count_#{comment.id}", :class=>'comment-likes'%>
+<%else%>
+ 	<%=content_tag :div, "", :id=>"comment_like_count_#{comment.id}", :class=>'comment-likes'%>
+<%end%>
+  <%= link_to image_tag("thumbsup.png", :border => 0), comment_like_link(comment),:remote=>:true%> 
+</div>
+
+</div>
+<% end%>
+</li>  
+
+

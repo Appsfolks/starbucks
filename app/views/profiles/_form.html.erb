@@ -1,0 +1,38 @@
+<div id='signup_form'>
+<%= form_for(@profile, :html=> {:multipart=>true}) do |f| %>
+  <% if @profile.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@profile.errors.count, "error") %> prohibited this profile from being saved:</h2>
+
+      <ul>
+      <% @profile.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+<div id='inneralign'>
+  <div class="field">
+    <%= f.label :first_name, 'First Name:', :class=>'label' %><br />
+    <%= f.text_field :first_name %>
+  </div>
+ <div class="field">
+    <%= f.label :last_name, 'Last Name:', :class=>'label' %><br />
+    <%= f.text_field :last_name %>
+  </div>
+  <div class="field">
+	<%= f.label :Birth_Day, 'BirthDay:', :class=>'label' %><br />
+    <%= date_select :profile, :birth_day %>
+  </div>
+
+<div class="field">
+	<%= f.label :image, 'Profile Photo', :class=>'label' %><br />
+    <%= f.file_field :image %>
+  </div>
+	<div id="signup-button">
+		<button class="blue-pill"> <% if params[:action] == 'edit' %> Update <%else%> Create <%end%> </button>
+   </div>
+	
+</div>
+<% end %>
+</div>

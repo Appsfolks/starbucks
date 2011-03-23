@@ -1,0 +1,12 @@
+<%= content_tag :ul, :id=>"comments_#{comments[0].commentable_id}", :class=>"commentlist" do%>
+
+
+
+  <% comments.each do |comment| %>
+	
+	<%= render :partial=>'comments/commentItem', :locals=>{:comment=>comment} %>
+
+ <% end %>
+
+
+<%end%>
